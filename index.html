@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truy tìm kho báu</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style>
+      img {
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+
+  <!--THAY ĐỔI SỐ Ở TRONG value =  ...  để đổi giá trị -->
+    <input type="hidden" value="90" id="txtNumber">
+  <!--END-->
+
+
+    <div class="" style="background-color: darkgray;">
+        <div class="row m-0 p-0" id="data">
+        </div>
+    </div>
+    <script>
+        window.addEventListener("beforeunload", function(event) {
+  event.preventDefault();
+  event.returnValue = "";
+  return "Bạn có chắc muốn rời khỏi trang?";
+});
+        $(document).ready(function() {
+  var dataDiv = $("#data");
+  var numb = $("#txtNumber").val();
+  var html = "";
+
+  for (var i = 1; i <= numb; i++) {
+    html += '<div class="col-md-4 m-0 p-1">';
+    html += '  <div class="card" style="width: 100%; height: 31rem;">';
+    html += '    <div class="card-header " style="height: 50px;">';
+    html += '      <h4 class="card-title  text-center">Câu hỏi số ' + i + '</h4>';
+    html += '    </div>';
+    html += '    <div class="card-body">';
+    html += '      <img onclick="fnShowImage(' + i + ');" id="' + i + 'c" src="Images/hoicham.jpg" style="height: 26rem;" class="card-img-top" alt="...">';
+    html += '      <img id="' + i + '" src="Images/' + i + '.jpg" style="display: none; height: 26rem;" class="card-img-top" alt="...">';
+    html += '    </div>';
+    html += '  </div>';
+    html += '</div>';
+  }
+
+  dataDiv.append(html);
+});
+function fnShowImage(id) {
+  $("#" + id + "c").fadeOut("slow", function() {
+    $("#" + id + "c").remove();
+    $("#" + id).css("display", "block");
+    $("#" + id).addClass("falling-star");
+  });
+}
+
+    </script>
+</body>
+</html>
